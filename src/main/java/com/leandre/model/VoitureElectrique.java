@@ -1,4 +1,4 @@
-package com.leandre;
+package com.leandre.model;
 
 public class VoitureElectrique extends Vehicule implements Electrique {
     public VoitureElectrique(String marque, String model, String annee) {

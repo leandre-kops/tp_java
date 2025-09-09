@@ -1,4 +1,4 @@
-package com.leandre;
+package com.leandre.model;
 
 public class Vehicule {
     protected String marque, model, annee;

@@ -1,4 +1,4 @@
-package com.leandre;
+package com.leandre.model;
 
 import java.util.ArrayList;
 
