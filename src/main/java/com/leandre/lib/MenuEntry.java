@@ -5,44 +5,55 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Scanner;
 
-public abstract class MenuEntry<T> implements Executable<T>, Inputable<T>, Showable, Listable, Runnable, Exitable {
+public abstract class MenuEntry<T> extends Entry<T> implements Listable, Exitable {
     static final Scanner sc = new Scanner(System.in);
 
-    final HashMap<T, MenuEntry> options;
-    final String name;
+    protected final String name;
     final T exit;
 
-    public MenuEntry(String name, HashMap<T, MenuEntry> options, T exit) {
+    public MenuEntry(String name, T exit) {
         this.name = name;
-        this.options = options;
         this.exit = exit;
     }
+
+    public abstract HashMap<T, Entry> getOptions();
 
     @Override
     public void run() {
         T input = null;
+
         while (true) {
             this.show();
             this.list();
-            input = this.read();
-            if (Objects.equals(input, this.exit)) {
-                final int exitCode = this.exit();
-                if (exitCode == 0) {
-                    break;
+            try {
+                input = this.read();
+                if (Objects.equals(input, this.exit)) {
+                    final int exitCode = this.exit();
+                    if (exitCode == 0) {
+                        break;
+                    }
                 }
+                this.execute(input);
+            }  catch (Exception e) {
+                // e.printStackTrace();
+                System.out.println(e.getMessage());
             }
-            this.execute(input);
         }
     }
 
     @Override
     public void execute(T input) {
-        for (Map.Entry<T, MenuEntry> entry : options.entrySet()) {
+        for (Map.Entry<T, Entry> entry : getOptions().entrySet()) {
             if (Objects.equals(entry.getKey(), input)) {
                 entry.getValue().run();
                 return;
             }
         }
         System.out.println(input.toString() + " Choix non prix en charge !");
+    }
+
+    @Override
+    public int exit() {
+        return 0;
     }
 }

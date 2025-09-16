@@ -1,23 +1,31 @@
 package com.leandre.lib;
 
-public class Action extends MenuEntry<String> {
-    @Override
-    public int exit() {
-        return 0;
+import java.util.Scanner;
+
+public abstract class Action extends Entry<String> {
+    static final Scanner sc = new Scanner(System.in);
+
+    protected final String prompt;
+
+    public Action(String prompt) {
+        this.prompt = prompt;
     }
 
     @Override
     public String read() {
-        return "";
-    }
-
-    @Override
-    public void list() {
-
+        return sc.nextLine();
     }
 
     @Override
     public void show() {
+        System.out.print(prompt + " : ");
+    }
 
+    @Override
+    public void run() {
+        this.show();
+        String input;
+        input = this.read();
+        this.execute(input);
     }
 }

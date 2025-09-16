@@ -35,6 +35,6 @@ public class Vehicule {
 
     @Override
     public String toString() {
-        return "Vehicule: {marque: %s, model: %s, annee: %s}".formatted(marque, model, annee);
+        return "%s: {marque: %s, model: %s, annee: %s}".formatted(this.getClass().getName(),marque, model, annee);
     }
 }

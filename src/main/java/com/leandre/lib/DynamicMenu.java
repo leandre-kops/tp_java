@@ -3,14 +3,12 @@ package com.leandre.lib;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Menu extends MenuEntry<Integer> {
-
-    final HashMap<Integer, Entry> options;
-
-    public Menu(String name, HashMap<Integer, Entry> options,  Integer exit) {
+public abstract class DynamicMenu extends MenuEntry<Integer> {
+    public DynamicMenu(String name, Integer exit) {
         super(name, exit);
-        this.options = options;
     }
+
+    public abstract HashMap<Integer, Entry> getOptions();
 
     @Override
     public void show() {
@@ -28,13 +26,8 @@ public class Menu extends MenuEntry<Integer> {
 
     @Override
     public Integer read() {
-        final int value = sc.nextInt();
+        int value = sc.nextInt();
         sc.nextLine();
         return value;
-    }
-
-    @Override
-    public HashMap<Integer, Entry> getOptions() {
-        return options;
     }
 }

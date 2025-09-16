@@ -5,7 +5,9 @@ import java.util.ArrayList;
 public class Garage {
     protected ArrayList<Vehicule> vehicules;
 
-    public Garage() {}
+    public Garage() {
+        vehicules = new ArrayList<>();
+    }
 
     public Garage(ArrayList<Vehicule> vehicules) {
         this.vehicules = vehicules;
@@ -27,5 +29,9 @@ public class Garage {
         for (Vehicule vehicule : vehicules) {
             System.out.println(vehicule);
         }
+    }
+
+    public int getSize() {
+        return vehicules.size();
     }
 }
